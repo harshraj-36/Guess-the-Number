@@ -35,7 +35,7 @@ while(RandomNumber!=guessnum)
     {
         alert("Congratulations! You have guessed the number.")
         score=100-wrongans;
-        alert("Your score is: " + score)
+        alert("Your score is: " + score + " out of 100")
         break;
     }
 
