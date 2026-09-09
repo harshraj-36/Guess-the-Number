@@ -33,9 +33,10 @@ while(RandomNumber!=guessnum)
 
     else if(RandomNumber==guessnum)
     {
-        alert("Congratulations! You hav guessed the number.")
+        alert("Congratulations! You have guessed the number.")
         score=100-wrongans;
-        alert("Your score is: ", score)
+        alert("Your score is: " + score)
+        break;
     }
 
     else
