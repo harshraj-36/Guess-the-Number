@@ -16,8 +16,7 @@ while(RandomNumber!=guessnum)
     /* The logic is that the loop must run until the guessed number is not equals to randomly generated number. And once it is equals to it will break the loop and come out of loop. */
 
 {
-    prompt("Guess the number between 1 to 100")
-    guessnum=prompt("Enter the number you guess: ")
+    guessnum=prompt("Enter the number you guess between 1 to 100")
     guessnum=Number.parseInt(guessnum)
 
     if(RandomNumber>guessnum)
