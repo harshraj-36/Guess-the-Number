@@ -168,4 +168,4 @@ guessInput.addEventListener("keydown", function(event)
     {
         guessButton.click();
     }
-});
+})
