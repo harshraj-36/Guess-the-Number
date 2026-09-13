@@ -6,6 +6,11 @@ The player has **10 chances** to guess a randomly generated number between **1 a
 
 ---
 
+## LIVE DEMO 🎮
+[Play Guess-the-Number ](https://harshraj-36.github.io/Guess-the-Number/)
+
+---
+
 ## 📌 About the Project
 
 I built this project while learning how JavaScript works with a real HTML interface.
