@@ -431,9 +431,9 @@ Some features I may add in future versions:
 
 ## 📸 Project Status
 
-**Status: Functional ✅**
+Status: Functional & Deployed ✅
 
-The current version includes the complete core gameplay, responsive UI, input validation, scoring, restart functionality, keyboard support, and animated feedback.
+The project is fully functional and deployed, featuring complete core gameplay, a responsive UI, input validation, scoring, restart functionality, keyboard support, and animated user feedback. It is live and available for users to play and interact with.
 
 ---
 
