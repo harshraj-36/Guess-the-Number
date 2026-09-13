@@ -3,9 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guess the Number Game</title>
+    <title>Guess The Number</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+    <div class="game-container">
+
+        <h1>Guess The Number</h1>
+        <h3>Guess a number between 1 and 100</h3>
+
+        <input type="number" id="guessInput" placeholder="Enter your guess">
+        <button id="guessBtn">Guess</button>
+
+        <p id="message"></p>
+        <p id="message1"></p>
+
+        <p>Chances left: <span id="chancelft">10</span></p>
+        <p>Score: <span id="score">100</span></p>
+
+        <button id="restartBtn">Restart</button>
+
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

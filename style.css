@@ -1,1 +1,676 @@
+/* ================================
+   GUESS THE NUMBER — PROFESSIONAL UI
+   ================================ */
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-main: #080b14;
+    --bg-secondary: #101525;
+    --card: rgba(17, 23, 40, 0.88);
+
+    --primary: #5b8cff;
+    --primary-light: #7da2ff;
+    --purple: #9b6cff;
+
+    --text-main: #f5f7ff;
+    --text-secondary: #9da7bd;
+
+    --border: rgba(125, 162, 255, 0.22);
+
+    --success: #42e8a0;
+    --danger: #ff5c7a;
+
+    --shadow: rgba(0, 0, 0, 0.55);
+}
+
+
+/* ================================
+   BODY
+   ================================ */
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    color: var(--text-main);
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(91, 140, 255, 0.14),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(155, 108, 255, 0.12),
+            transparent 30%
+        ),
+        var(--bg-main);
+
+    overflow-x: hidden;
+}
+
+
+/* ================================
+   ANIMATED BACKGROUND
+   ================================ */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: 0.15;
+
+    pointer-events: none;
+
+    animation: floatingGlow 10s ease-in-out infinite alternate;
+}
+
+body::before {
+    background: #315dcc;
+
+    top: -250px;
+    left: -200px;
+}
+
+body::after {
+    background: #703fc2;
+
+    bottom: -250px;
+    right: -200px;
+
+    animation-delay: -5s;
+}
+
+@keyframes floatingGlow {
+
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(70px, 50px);
+    }
+}
+
+
+/* ================================
+   GAME CARD
+   ================================ */
+
+.game-container {
+    position: relative;
+
+    width: min(100%, 430px);
+
+    padding: 38px 32px;
+
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 25px 70px var(--shadow),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    animation: cardEnter 0.7s ease-out;
+
+    overflow: hidden;
+}
+
+
+/* Subtle animated border */
+
+.game-container::before {
+    content: "";
+
+    position: absolute;
+
+    inset: -2px;
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 25%,
+            rgba(91, 140, 255, 0.5),
+            transparent 75%
+        );
+
+    background-size: 250% 250%;
+
+    animation: borderMove 6s linear infinite;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+@keyframes borderMove {
+
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes cardEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* ================================
+   TITLE
+   ================================ */
+
+h1 {
+    font-size: clamp(2rem, 7vw, 2.7rem);
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 10px;
+
+    background:
+        linear-gradient(
+            110deg,
+            #ffffff,
+            #7da2ff,
+            #b18aff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+
+    animation: titleGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+
+    from {
+        filter: drop-shadow(0 0 5px rgba(91, 140, 255, 0.15));
+    }
+
+    to {
+        filter: drop-shadow(0 0 14px rgba(91, 140, 255, 0.35));
+    }
+}
+
+
+/* ================================
+   SUBTITLE
+   ================================ */
+
+h3 {
+    margin-bottom: 28px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.95rem;
+
+    font-weight: 500;
+
+    letter-spacing: 0.3px;
+}
+
+
+/* ================================
+   INPUT
+   ================================ */
+
+#guessInput {
+    width: 100%;
+
+    height: 54px;
+
+    padding: 0 18px;
+
+    border: 1px solid rgba(125, 162, 255, 0.2);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    background: rgba(7, 10, 20, 0.75);
+
+    color: var(--text-main);
+
+    font-size: 1rem;
+
+    text-align: center;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        transform 0.2s ease;
+}
+
+#guessInput::placeholder {
+    color: #68738b;
+}
+
+#guessInput:focus {
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 0 3px rgba(91, 140, 255, 0.12),
+        0 0 25px rgba(91, 140, 255, 0.12);
+
+    transform: translateY(-1px);
+}
+
+
+/* Remove number arrows */
+
+#guessInput::-webkit-inner-spin-button,
+#guessInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#guessInput {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+
+/* ================================
+   BUTTONS
+   ================================ */
+
+button {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 14px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    font-size: 0.98rem;
+
+    font-weight: 700;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    color: white;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+/* Guess button */
+
+#guessBtn {
+    background:
+        linear-gradient(
+            135deg,
+            #4f7fff,
+            #7557e8
+        );
+
+    box-shadow:
+        0 8px 25px rgba(91, 140, 255, 0.25);
+}
+
+#guessBtn:hover {
+    transform: translateY(-2px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+        0 12px 30px rgba(91, 140, 255, 0.35);
+}
+
+#guessBtn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+
+/* Restart button */
+
+#restartBtn {
+    margin-top: 24px;
+
+    background: rgba(255, 255, 255, 0.045);
+
+    border: 1px solid rgba(125, 162, 255, 0.2);
+
+    color: #c8d1e6;
+}
+
+#restartBtn:hover {
+    transform: translateY(-2px);
+
+    background: rgba(91, 140, 255, 0.1);
+
+    border-color: rgba(125, 162, 255, 0.4);
+
+    color: white;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.25);
+}
+
+#restartBtn:active {
+    transform: translateY(1px) scale(0.98);
+}
+
+
+/* ================================
+   GAME STATS
+   ================================ */
+
+.game-container > p:not(#message):not(#message1) {
+    margin-top: 18px;
+
+    color: var(--text-secondary);
+
+    font-size: 0.95rem;
+}
+
+#chancelft,
+#score {
+    color: var(--text-main);
+
+    font-weight: 800;
+
+    margin-left: 5px;
+}
+
+
+/* ================================
+   MESSAGE POPUPS
+   ================================ */
+
+#message,
+#message1 {
+
+    position: fixed;
+
+    left: 50%;
+
+    width: min(90%, 400px);
+
+    padding: 13px 18px;
+
+    border-radius: 14px;
+
+    background: rgba(12, 16, 29, 0.96);
+
+    border: 1px solid rgba(125, 162, 255, 0.35);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.55),
+        0 0 25px rgba(91, 140, 255, 0.08);
+
+    color: #f5f7ff;
+
+    text-align: center;
+
+    font-size: 0.92rem;
+
+    line-height: 1.5;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    z-index: 1000;
+}
+
+#message {
+    top: 28px;
+}
+
+#message1 {
+    top: 88px;
+}
+
+
+/* ================================
+   POPUP ANIMATION
+   ================================ */
+
+@keyframes popupMessage {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-25px)
+            scale(0.94);
+    }
+
+    12% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+    82% {
+        opacity: 1;
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            translateY(-18px)
+            scale(0.97);
+    }
+}
+
+
+/* ================================
+   MOBILE
+   ================================ */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 14px;
+    }
+
+    .game-container {
+        padding: 30px 22px;
+
+        border-radius: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h3 {
+        font-size: 0.88rem;
+
+        margin-bottom: 22px;
+    }
+
+    #guessInput {
+        height: 52px;
+    }
+
+    button {
+        height: 50px;
+    }
+
+    #message,
+    #message1 {
+        width: calc(100% - 28px);
+
+        font-size: 0.88rem;
+
+        padding: 12px 14px;
+    }
+
+    #message {
+        top: 18px;
+    }
+
+    #message1 {
+        top: 78px;
+    }
+}
+
+
+/* ================================
+   SMALL PHONES
+   ================================ */
+
+@media (max-width: 360px) {
+
+    .game-container {
+        padding: 26px 18px;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 0.82rem;
+    }
+
+    #guessInput {
+        height: 49px;
+    }
+
+    button {
+        height: 48px;
+    }
+}
+
+
+/* ================================
+   LANDSCAPE PHONES
+   ================================ */
+
+@media (max-height: 550px) and (orientation: landscape) {
+
+    body {
+        align-items: flex-start;
+
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+
+    .game-container {
+        margin: auto;
+
+        padding: 22px;
+
+        max-width: 500px;
+    }
+
+    h3 {
+        margin-bottom: 16px;
+    }
+
+    button {
+        margin-top: 10px;
+    }
+
+    #restartBtn {
+        margin-top: 16px;
+    }
+}
+
+
+/* ================================
+   ACCESSIBILITY
+   ================================ */
+
+button:focus-visible,
+#guessInput:focus-visible {
+    outline: 2px solid var(--primary-light);
+
+    outline-offset: 3px;
+}
+
+
+/* ================================
+   REDUCE MOTION
+   ================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
