@@ -9,8 +9,6 @@ The player has **10 chances** to guess a randomly generated number between **1 a
 ## LIVE DEMO 🎮
 [Play Guess-the-Number](https://harshraj-36.github.io/Guess-the-Number/)
 
-[Watch Live Demo Video Guess-the-Number](Guess-The-Number-Demo.mp4)
-
 ---
 
 ## 📌 About the Project
