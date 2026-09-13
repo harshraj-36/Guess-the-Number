@@ -24,11 +24,6 @@ let messageis1 = document.getElementById("message1");
 let wrongans = 0; 
 let won = false; 
 
-
-/* =========================
-   MESSAGE POPUP FUNCTION
-   ========================= */
-
 function showMessage() 
 {
     messageis.style.animation = "none";
@@ -47,11 +42,6 @@ function showMessage()
         messageis1.style.animation = "popupMessage 3.5s ease forwards";
     }
 }
-
-
-/* =========================
-   RESTART BUTTON
-   ========================= */
 
 let restart = document.getElementById("restartBtn");
 
@@ -77,10 +67,6 @@ restart.addEventListener("click", function()
     document.getElementById("guessInput").value = ""; 
 }); 
 
-
-/* =========================
-   GUESS BUTTON
-   ========================= */
 
 let guessButton = document.getElementById("guessBtn");
 
