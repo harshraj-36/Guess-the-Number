@@ -5,162 +5,200 @@
 }
 
 :root {
-    --bg-main: #080b14;
-    --bg-secondary: #101525;
-    --card: rgba(17, 23, 40, 0.88);
-
-    --primary: #5b8cff;
-    --primary-light: #7da2ff;
-    --purple: #9b6cff;
-
-    --text-main: #f5f7ff;
-    --text-secondary: #9da7bd;
-
-    --border: rgba(125, 162, 255, 0.22);
-
-    --success: #42e8a0;
-    --danger: #ff5c7a;
-
-    --shadow: rgba(0, 0, 0, 0.55);
+    --bg-main: #050816;
+    --bg-secondary: #0b1028;
+    --card: rgba(12, 18, 45, 0.72);
+    --card-light: rgba(25, 35, 75, 0.55);
+    --cyan: #00eaff;
+    --blue: #4d7cff;
+    --purple: #a855ff;
+    --pink: #ff3cac;
+    --violet: #7c3cff;
+    --text-main: #ffffff;
+    --text-secondary: #aebbea;
+    --border: rgba(0, 234, 255, 0.35);
+    --success: #36f5a0;
+    --danger: #ff477e;
+    --shadow: rgba(0, 0, 0, 0.65);
 }
 
 body {
     min-height: 100vh;
     min-height: 100dvh;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     padding: 20px;
-
     font-family:
         Inter,
         "Segoe UI",
         Roboto,
         Arial,
         sans-serif;
-
     color: var(--text-main);
-
     background:
         radial-gradient(
-            circle at 20% 20%,
-            rgba(91, 140, 255, 0.14),
-            transparent 30%
+            circle at 10% 15%,
+            rgba(0, 234, 255, 0.25),
+            transparent 25%
         ),
         radial-gradient(
-            circle at 80% 80%,
-            rgba(155, 108, 255, 0.12),
+            circle at 90% 20%,
+            rgba(168, 85, 255, 0.25),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 80% 90%,
+            rgba(255, 60, 172, 0.18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 15% 85%,
+            rgba(77, 124, 255, 0.2),
             transparent 30%
         ),
-        var(--bg-main);
-
+        linear-gradient(
+            135deg,
+            #030511,
+            #080d25,
+            #0a0920,
+            #050816
+        );
     overflow-x: hidden;
+    position: relative;
 }
-
 
 body::before,
 body::after {
     content: "";
     position: fixed;
-
-    width: 500px;
-    height: 500px;
-
+    width: 450px;
+    height: 450px;
     border-radius: 50%;
-
-    filter: blur(100px);
-
-    opacity: 0.15;
-
+    filter: blur(90px);
     pointer-events: none;
-
-    animation: floatingGlow 10s ease-in-out infinite alternate;
+    opacity: 0.35;
+    z-index: -2;
+    animation:
+        floatingGlow 12s ease-in-out infinite alternate,
+        colorPulse 6s ease-in-out infinite alternate;
 }
 
 body::before {
-    background: #315dcc;
-
-    top: -250px;
-    left: -200px;
+    background: #00eaff;
+    top: -220px;
+    left: -180px;
 }
 
 body::after {
-    background: #703fc2;
-
-    bottom: -250px;
+    background: #a855ff;
     right: -200px;
-
-    animation-delay: -5s;
+    bottom: -220px;
+    animation-delay: -6s;
 }
 
 @keyframes floatingGlow {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
 
+    50% {
+        transform: translate(70px, 45px) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-20px, 80px) scale(0.95);
+    }
+}
+
+@keyframes colorPulse {
     from {
-        transform: translate(0, 0);
+        opacity: 0.25;
     }
 
     to {
-        transform: translate(70px, 50px);
+        opacity: 0.45;
     }
+}
+
+body {
+    isolation: isolate;
+}
+
+body > * {
+    position: relative;
+    z-index: 1;
 }
 
 .game-container {
     position: relative;
-
     width: min(100%, 430px);
-
-    padding: 38px 32px;
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 24px;
-
+    padding: 40px 32px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18, 28, 65, 0.85),
+            rgba(8, 12, 32, 0.78)
+        );
+    border: 1px solid rgba(0, 234, 255, 0.35);
+    border-radius: 28px;
     text-align: center;
-
     box-shadow:
-        0 25px 70px var(--shadow),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    animation: cardEnter 0.7s ease-out;
-
+        0 30px 80px rgba(0, 0, 0, 0.65),
+        0 0 35px rgba(0, 234, 255, 0.12),
+        0 0 80px rgba(168, 85, 255, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
     overflow: hidden;
+    animation:
+        cardEnter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+        cardFloat 6s ease-in-out infinite;
 }
 
 .game-container::before {
     content: "";
-
     position: absolute;
-
     inset: -2px;
-
-    border-radius: 26px;
-
+    border-radius: 30px;
+    padding: 2px;
     background:
         linear-gradient(
             120deg,
-            transparent 25%,
-            rgba(91, 140, 255, 0.5),
-            transparent 75%
+            transparent 10%,
+            var(--cyan),
+            var(--blue),
+            var(--purple),
+            var(--pink),
+            transparent 90%
         );
-
-    background-size: 250% 250%;
-
-    animation: borderMove 6s linear infinite;
-
+    background-size: 300% 300%;
+    animation: borderMove 5s linear infinite;
     pointer-events: none;
-
     z-index: -1;
+    opacity: 0.9;
+}
+
+.game-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+    width: 80%;
+    height: 100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.08),
+            transparent
+        );
+    transform: skewX(-20deg);
+    animation: glassSweep 7s ease-in-out infinite;
+    pointer-events: none;
 }
 
 @keyframes borderMove {
-
     0% {
         background-position: 0% 50%;
     }
@@ -174,110 +212,164 @@ body::after {
     }
 }
 
-@keyframes cardEnter {
+@keyframes glassSweep {
+    0%,
+    45% {
+        left: -120%;
+    }
 
+    70%,
+    100% {
+        left: 150%;
+    }
+}
+
+@keyframes cardEnter {
     from {
         opacity: 0;
-        transform: translateY(25px) scale(0.97);
+        transform:
+            translateY(35px)
+            scale(0.94);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes cardFloat {
+    0%,
+    100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -5px;
     }
 }
 
 h1 {
+    position: relative;
     font-size: clamp(2rem, 7vw, 2.7rem);
-
-    font-weight: 800;
-
-    letter-spacing: -1px;
-
+    font-weight: 900;
+    letter-spacing: -1.5px;
     margin-bottom: 10px;
-
     background:
         linear-gradient(
-            110deg,
-            #ffffff,
-            #7da2ff,
-            #b18aff
+            100deg,
+            #ffffff 0%,
+            #5ffaff 25%,
+            #ffffff 45%,
+            #8ca8ff 65%,
+            #ff79dc 90%
         );
-
+    background-size: 250% auto;
     -webkit-background-clip: text;
     background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
-    animation: titleGlow 4s ease-in-out infinite alternate;
+    animation:
+        titleGradient 5s linear infinite,
+        titleGlow 3s ease-in-out infinite alternate;
 }
 
-@keyframes titleGlow {
-
+@keyframes titleGradient {
     from {
-        filter: drop-shadow(0 0 5px rgba(91, 140, 255, 0.15));
+        background-position: 0% center;
     }
 
     to {
-        filter: drop-shadow(0 0 14px rgba(91, 140, 255, 0.35));
+        background-position: 250% center;
     }
 }
 
+@keyframes titleGlow {
+    from {
+        filter:
+            drop-shadow(0 0 5px rgba(0, 234, 255, 0.25));
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 18px rgba(0, 234, 255, 0.55))
+            drop-shadow(0 0 30px rgba(168, 85, 255, 0.25));
+    }
+}
 
 h3 {
     margin-bottom: 28px;
-
     color: var(--text-secondary);
-
     font-size: 0.95rem;
-
     font-weight: 500;
-
-    letter-spacing: 0.3px;
+    letter-spacing: 0.4px;
+    animation: subtitleFade 1s ease-out 0.3s both;
 }
 
+@keyframes subtitleFade {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
 #guessInput {
     width: 100%;
-
-    height: 54px;
-
+    height: 56px;
     padding: 0 18px;
-
-    border: 1px solid rgba(125, 162, 255, 0.2);
-
-    border-radius: 14px;
-
+    border: 1px solid rgba(0, 234, 255, 0.3);
+    border-radius: 15px;
     outline: none;
-
-    background: rgba(7, 10, 20, 0.75);
-
+    background:
+        linear-gradient(
+            145deg,
+            rgba(2, 8, 25, 0.9),
+            rgba(10, 16, 40, 0.75)
+        );
     color: var(--text-main);
-
     font-size: 1rem;
-
     text-align: center;
-
     transition:
-        border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        transform 0.2s ease;
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.2s ease,
+        background 0.3s ease;
+    box-shadow:
+        inset 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 #guessInput::placeholder {
-    color: #68738b;
+    color: #7180a5;
+    transition: color 0.25s ease;
+}
+
+#guessInput:hover {
+    border-color: rgba(0, 234, 255, 0.55);
+    box-shadow:
+        0 0 18px rgba(0, 234, 255, 0.08);
 }
 
 #guessInput:focus {
-    border-color: var(--primary);
-
+    border-color: var(--cyan);
+    background:
+        rgba(5, 15, 38, 0.95);
     box-shadow:
-        0 0 0 3px rgba(91, 140, 255, 0.12),
-        0 0 25px rgba(91, 140, 255, 0.12);
-
-    transform: translateY(-1px);
+        0 0 0 3px rgba(0, 234, 255, 0.1),
+        0 0 20px rgba(0, 234, 255, 0.2),
+        0 0 45px rgba(0, 234, 255, 0.08),
+        inset 0 0 15px rgba(0, 234, 255, 0.05);
+    transform: translateY(-2px);
 }
 
+#guessInput:focus::placeholder {
+    color: #9defff;
+}
 
 #guessInput::-webkit-inner-spin-button,
 #guessInput::-webkit-outer-spin-button {
@@ -290,138 +382,179 @@ h3 {
     appearance: textfield;
 }
 
-
 button {
+    position: relative;
     width: 100%;
-
-    height: 52px;
-
+    height: 53px;
     margin-top: 14px;
-
     border: none;
-
-    border-radius: 14px;
-
+    border-radius: 15px;
     font-size: 0.98rem;
-
-    font-weight: 700;
-
-    letter-spacing: 0.2px;
-
+    font-weight: 800;
+    letter-spacing: 0.3px;
     cursor: pointer;
-
     color: white;
-
+    overflow: hidden;
     transition:
-        transform 0.18s ease,
-        box-shadow 0.25s ease,
-        filter 0.25s ease;
+        transform 0.2s ease,
+        box-shadow 0.3s ease,
+        filter 0.3s ease;
 }
 
 #guessBtn {
     background:
         linear-gradient(
-            135deg,
-            #4f7fff,
-            #7557e8
+            110deg,
+            #00d9ff,
+            #347cff,
+            #713cff,
+            #d83cff
         );
-
+    background-size: 250% 250%;
     box-shadow:
-        0 8px 25px rgba(91, 140, 255, 0.25);
+        0 8px 25px rgba(0, 174, 255, 0.28),
+        0 0 20px rgba(122, 60, 255, 0.15);
+    animation: buttonGradient 5s ease infinite;
+}
+
+@keyframes buttonGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+#guessBtn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 55%;
+    height: 100%;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.35),
+            transparent
+        );
+    transform: skewX(-20deg);
+    animation: buttonShine 3.5s ease-in-out infinite;
+}
+
+@keyframes buttonShine {
+    0%,
+    45% {
+        left: -100%;
+    }
+
+    70%,
+    100% {
+        left: 150%;
+    }
 }
 
 #guessBtn:hover {
-    transform: translateY(-2px);
-
-    filter: brightness(1.08);
-
+    transform: translateY(-3px) scale(1.01);
+    filter: brightness(1.15);
     box-shadow:
-        0 12px 30px rgba(91, 140, 255, 0.35);
+        0 12px 35px rgba(0, 174, 255, 0.38),
+        0 0 30px rgba(168, 85, 255, 0.3);
 }
 
 #guessBtn:active {
-    transform: translateY(1px) scale(0.98);
+    transform:
+        translateY(1px)
+        scale(0.97);
 }
 
 #restartBtn {
     margin-top: 24px;
-
-    background: rgba(255, 255, 255, 0.045);
-
-    border: 1px solid rgba(125, 162, 255, 0.2);
-
-    color: #c8d1e6;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(18, 29, 65, 0.85),
+            rgba(15, 12, 40, 0.85)
+        );
+    border: 1px solid rgba(168, 85, 255, 0.35);
+    color: #cbd6ff;
+    box-shadow:
+        inset 0 0 15px rgba(168, 85, 255, 0.04);
 }
 
 #restartBtn:hover {
-    transform: translateY(-2px);
-
-    background: rgba(91, 140, 255, 0.1);
-
-    border-color: rgba(125, 162, 255, 0.4);
-
+    transform: translateY(-3px);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 234, 255, 0.12),
+            rgba(168, 85, 255, 0.15)
+        );
+    border-color: rgba(0, 234, 255, 0.65);
     color: white;
-
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.25);
+        0 8px 30px rgba(0, 234, 255, 0.15),
+        0 0 20px rgba(168, 85, 255, 0.1);
 }
 
 #restartBtn:active {
-    transform: translateY(1px) scale(0.98);
+    transform:
+        translateY(1px)
+        scale(0.97);
 }
-
 
 .game-container > p:not(#message):not(#message1) {
     margin-top: 18px;
-
     color: var(--text-secondary);
-
     font-size: 0.95rem;
 }
 
 #chancelft,
 #score {
-    color: var(--text-main);
-
-    font-weight: 800;
-
+    color: #ffffff;
+    font-weight: 900;
     margin-left: 5px;
+    text-shadow:
+        0 0 8px rgba(0, 234, 255, 0.4);
+    transition:
+        color 0.25s ease,
+        text-shadow 0.25s ease;
 }
 
 #message,
 #message1 {
-
     position: fixed;
-
     left: 50%;
-
     width: min(90%, 400px);
-
-    padding: 13px 18px;
-
-    border-radius: 14px;
-
-    background: rgba(12, 16, 29, 0.96);
-
-    border: 1px solid rgba(125, 162, 255, 0.35);
-
+    padding: 14px 20px;
+    border-radius: 15px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7, 17, 38, 0.96),
+            rgba(22, 9, 48, 0.96)
+        );
+    border: 1px solid rgba(0, 234, 255, 0.45);
     box-shadow:
-        0 15px 45px rgba(0, 0, 0, 0.55),
-        0 0 25px rgba(91, 140, 255, 0.08);
-
+        0 15px 45px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(0, 234, 255, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     color: #f5f7ff;
-
     text-align: center;
-
     font-size: 0.92rem;
-
     line-height: 1.5;
-
     opacity: 0;
-
     pointer-events: none;
-
     z-index: 1000;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 }
 
 #message {
@@ -430,44 +563,47 @@ button {
 
 #message1 {
     top: 88px;
+    border-color: rgba(168, 85, 255, 0.5);
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.6),
+        0 0 25px rgba(168, 85, 255, 0.18);
 }
 
 @keyframes popupMessage {
-
     0% {
         opacity: 0;
-
         transform:
             translateX(-50%)
-            translateY(-25px)
-            scale(0.94);
+            translateY(-30px)
+            scale(0.9);
+        filter: blur(5px);
     }
 
     12% {
         opacity: 1;
-
         transform:
             translateX(-50%)
             translateY(0)
             scale(1);
+        filter: blur(0);
     }
 
     82% {
         opacity: 1;
-
         transform:
             translateX(-50%)
             translateY(0)
             scale(1);
+        filter: blur(0);
     }
 
     100% {
         opacity: 0;
-
         transform:
             translateX(-50%)
-            translateY(-18px)
-            scale(0.97);
+            translateY(-20px)
+            scale(0.96);
+        filter: blur(3px);
     }
 }
 
@@ -479,8 +615,7 @@ button {
 
     .game-container {
         padding: 30px 22px;
-
-        border-radius: 20px;
+        border-radius: 23px;
     }
 
     h1 {
@@ -489,7 +624,6 @@ button {
 
     h3 {
         font-size: 0.88rem;
-
         margin-bottom: 22px;
     }
 
@@ -504,9 +638,7 @@ button {
     #message,
     #message1 {
         width: calc(100% - 28px);
-
         font-size: 0.88rem;
-
         padding: 12px 14px;
     }
 
@@ -542,21 +674,17 @@ button {
     }
 }
 
-
 @media (max-height: 550px) and (orientation: landscape) {
 
     body {
         align-items: flex-start;
-
         padding-top: 15px;
         padding-bottom: 15px;
     }
 
     .game-container {
         margin: auto;
-
         padding: 22px;
-
         max-width: 500px;
     }
 
@@ -573,20 +701,20 @@ button {
     }
 }
 
-
 button:focus-visible,
 #guessInput:focus-visible {
-    outline: 2px solid var(--primary-light);
-
+    outline:
+        2px solid var(--cyan);
     outline-offset: 3px;
+    box-shadow:
+        0 0 20px rgba(0, 234, 255, 0.35);
 }
 
 @media (prefers-reduced-motion: reduce) {
 
     *,
     *::before,
-    *::after 
-    {
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
